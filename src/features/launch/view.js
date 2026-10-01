@@ -2,15 +2,28 @@ import { createScope, setPressed } from '../../app/lifecycle.js';
 import { icon } from '../../ui/icons.js';
 import { formatTime } from '../../ui/formatters.js';
 import { CAMERA_MODES } from '../../ui/config.js';
+import { createCountdownView } from './countdown-view.js';
 
 /** Flight controls and telemetry. Playback rules live in mission-controller.js. */
-export function createLaunchFeature({ dom, window, context, mission, toast, onChange, onExplore }) {
+export function createLaunchFeature({
+  dom,
+  window,
+  context,
+  mission,
+  preferences,
+  createAudio,
+  toast,
+  onChange,
+  onExplore,
+}) {
   const $ = dom.one,
     scope = createScope(window);
   let view = 'orbit',
     lastStatus = '',
     markerElements = new Map();
   const active = () => context.mode === 'launch';
+  const countdown = createCountdownView({ dom, window, context, preferences, createAudio });
+  scope.own(countdown.dispose);
   function syncCamera(reset = false) {
     const frame = mission.frame();
     $('#subject-choice').value = frame.subject;
@@ -95,6 +108,7 @@ export function createLaunchFeature({ dom, window, context, mission, toast, onCh
   }
   function render(frame = mission.frame()) {
     setPressed(dom.all('[data-rate]'), (button) => Number(button.dataset.rate) === frame.rate);
+    countdown.update(frame);
     if (!active()) return;
     const { state, status, subject, timeline, presentationTime } = frame;
     const viewingBooster = subject === 'booster' && state.separated && frame.mission.hasRecovery;

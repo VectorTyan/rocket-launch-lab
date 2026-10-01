@@ -1,10 +1,12 @@
 import { FleetSimulation } from '../../fleet-simulation.js';
 import { MissionClock, timelinePresentation } from '../../mission-timeline.js';
+import { createCountdownState } from './countdown-state.js';
 
 /** Application playback policy. No DOM, browser globals, or Three.js dependency. */
 export function createMissionController(rocketId, { now = () => performance.now() } = {}) {
   const simulation = new FleetSimulation(rocketId);
   const clock = new MissionClock(simulation, now());
+  const countdown = createCountdownState(simulation.mission, simulation.rate);
   let mode = 'launch',
     visible = true,
     subject = 'vehicle';
@@ -17,9 +19,27 @@ export function createMissionController(rocketId, { now = () => performance.now(
     completionDismissed = false;
   }
   function advance(time = now()) {
-    const { state } = clock.advance(time, active());
+    // Split at the real T+1.2 boundary. Applying the restored multiplier to an
+    // entire slow frame would fast-forward part of the protected launch window.
+    if (countdown.armed && active() && simulation.status === 'running') {
+      const remaining = countdown.releaseTime - simulation.time;
+      const wallSeconds =
+        Number.isFinite(time) && Number.isFinite(clock.timestamp)
+          ? Math.max(0, (time - clock.timestamp) / 1000)
+          : 0;
+      if (remaining > 0 && wallSeconds >= remaining) {
+        clock.advance(clock.timestamp + remaining * 1000, true);
+        simulation.setRate(countdown.cancel());
+      } else if (remaining <= 1e-9) {
+        simulation.setRate(countdown.cancel());
+      }
+    }
+    clock.advance(time, active());
+    if (countdown.armed && simulation.time >= countdown.releaseTime - 1e-9) {
+      simulation.setRate(countdown.cancel());
+    }
     clock.drainEvents();
-    return state;
+    return simulation.state;
   }
   function frame(state = simulation.state) {
     const complete = simulation.time >= simulation.mission.duration;
@@ -29,6 +49,12 @@ export function createMissionController(rocketId, { now = () => performance.now(
       time: simulation.time,
       status: complete ? 'complete' : simulation.status,
       rate: simulation.rate,
+      countdown: countdown.snapshot({
+        time: simulation.time,
+        status: simulation.status,
+        active: active(),
+        effectiveRate: simulation.rate,
+      }),
       subject,
       presentationTime,
       timeline: timelinePresentation(simulation.mission, state.time),
@@ -46,23 +72,39 @@ export function createMissionController(rocketId, { now = () => performance.now(
     }
     return frame(state);
   }
-  function reset() {
+  function resetAt(time) {
     simulation.reset();
-    clock.rebase(now());
+    countdown.reset(simulation.mission, simulation.rate);
+    clock.rebase(time);
     resetPresentation();
     subject = 'vehicle';
     hiddenPause = false;
+  }
+  function reset() {
+    resetAt(now());
   }
   function setRocket(id) {
     simulation.setRocket(id);
     reset();
   }
   function toggle() {
-    advance();
-    if (simulation.time >= simulation.mission.duration) reset();
+    const time = now();
+    advance(time);
+    if (simulation.time >= simulation.mission.duration) {
+      const replayRate = countdown.requestedRate;
+      resetAt(time);
+      countdown.setRequestedRate(replayRate);
+      simulation.setRate(replayRate);
+    }
     if (simulation.status === 'running') simulation.togglePause();
-    else simulation.launch();
-    clock.rebase(now());
+    else {
+      if (simulation.status === 'ready') {
+        countdown.arm(simulation.rate);
+        simulation.setRate(1);
+      }
+      simulation.launch();
+    }
+    clock.rebase(time);
   }
   function setMode(next) {
     advance();
@@ -78,6 +120,7 @@ export function createMissionController(rocketId, { now = () => performance.now(
   }
   function seek(time, target = subject) {
     simulation.seek(time);
+    simulation.setRate(countdown.cancel());
     clock.rebase(now());
     resetPresentation();
     setSubject(target);
@@ -94,8 +137,12 @@ export function createMissionController(rocketId, { now = () => performance.now(
     return event;
   }
   function setRate(rate) {
-    clock.setRate(rate, now(), active());
-    clock.drainEvents();
+    if (typeof rate !== 'number' || !Number.isFinite(rate) || rate <= 0) {
+      throw new RangeError('Playback rate must be a finite number greater than zero.');
+    }
+    advance();
+    countdown.setRequestedRate(rate);
+    simulation.setRate(countdown.armed ? 1 : rate);
   }
   function setVisible(next) {
     if (!next && visible) {

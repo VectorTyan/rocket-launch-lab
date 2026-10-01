@@ -74,7 +74,7 @@ function fixture(t, options = {}) {
     },
     onError: (error) => errors.push(error),
     createAudio: (src) => {
-      const item = {
+      const item = Object.assign(new window.EventTarget(), {
         src,
         paused: true,
         removed: false,
@@ -91,7 +91,7 @@ function fixture(t, options = {}) {
           this.removed = true;
         },
         load() {},
-      };
+      });
       audio.push(item);
       return item;
     },
@@ -188,9 +188,17 @@ test('DOM playback, rate changes and model render use one mission timestamp', (t
   f.click('[data-rate="20"]');
   assert.equal(f.app.state.flight.time, -8.5);
   f.step(1000);
+  assert.equal(f.app.state.flight.time, -7.5);
+  assert.equal(f.app.state.flight.rate, 1);
+  assert.equal(f.app.state.flight.countdown.requestedRate, 20);
+  assert.equal(f.$('#countdown-number').textContent, '5');
+  assert.match(f.$('#countdown-playback-note').textContent, /恢复 20×/);
+  f.step(9200);
   const frame = f.app.state.flight;
-  assert.equal(frame.time, 11.5);
-  assert.equal(Number(f.$('#timeline').value), 11.5);
+  assert.ok(Math.abs(frame.time - 11.2) < 1e-8);
+  assert.equal(Number(f.$('#timeline').value), 11.2);
+  assert.equal(frame.rate, 20);
+  assert.equal(f.$('#launch-ceremony').hidden, true);
   assert.equal(f.$('#clock').textContent, 'T+00:11');
   assert.equal(f.sceneCalls.filter((c) => c.name === 'update').at(-1).args[0].time, frame.time);
   f.click('[data-timeline-event="stage-separation"]');
@@ -398,4 +406,89 @@ test('keyboard shortcuts leave edited inputs and open dialogs untouched', (t) =>
   f.click('#close-about');
   key();
   assert.equal(f.app.state.flight.status, 'running');
+});
+
+test('launch ceremony plays numbers before ignition, pauses cleanly and queues faster playback', async (t) => {
+  const f = fixture(t);
+  f.click('[data-rate="100"]');
+  f.click('#launch');
+  await Promise.resolve();
+  assert.equal(f.$('#launch-ceremony').hidden, false);
+  assert.equal(f.$('#countdown-number').textContent, '7');
+  assert.equal(f.app.state.flight.rate, 1);
+  assert.equal(f.app.state.flight.countdown.requestedRate, 100);
+  assert.match(f.audio[0].src, /count-7\.wav$/);
+  assert.equal(f.audio[0].playCalls, 1);
+  f.step(100);
+  f.click('#launch');
+  assert.equal(f.audio[0].paused, true);
+  assert.equal(f.$('#launch-ceremony').classList.contains('paused'), true);
+  f.step(3000);
+  assert.equal(f.app.state.flight.time, -9.9);
+  f.click('#launch');
+  await Promise.resolve();
+  assert.equal(f.audio[0].playCalls, 2);
+  f.step(6900);
+  await Promise.resolve();
+  assert.equal(f.app.state.flight.time, -3);
+  assert.equal(f.app.state.flight.state.firstEngineOn, true);
+  assert.equal(f.$('#countdown-number').textContent, '点火');
+  assert.match(f.audio.at(-1).src, /ignition\.wav$/);
+  f.step(3000);
+  await Promise.resolve();
+  assert.equal(f.app.state.flight.time, 0);
+  assert.equal(f.$('#countdown-number').textContent, '起飞');
+  assert.match(f.audio.at(-1).src, /liftoff\.wav$/);
+  f.step(1200);
+  assert.equal(f.app.state.flight.rate, 100);
+  assert.equal(f.$('#launch-ceremony').hidden, true);
+});
+
+test('countdown mute persists, mode exit and seek stop voice without queued stale announcements', async (t) => {
+  const f = fixture(t);
+  f.click('#launch');
+  await Promise.resolve();
+  f.click('#countdown-voice');
+  assert.equal(f.audio[0].removed, true);
+  assert.equal(f.window.localStorage.getItem('karman.countdown-voice'), 'off');
+  f.step(1000);
+  assert.equal(f.audio.length, 1);
+  f.click('#countdown-voice');
+  await Promise.resolve();
+  assert.match(f.audio.at(-1).src, /count-6\.wav$/);
+  f.click('[data-mode="structure"]');
+  assert.equal(f.audio.at(-1).paused, true);
+  assert.equal(f.$('#launch-ceremony').hidden, true);
+  f.click('[data-mode="launch"]');
+  f.click('[data-timeline-event="max-q"]');
+  assert.equal(f.$('#launch-ceremony').hidden, true);
+  assert.equal(f.app.state.flight.time, 67);
+  const played = f.audio.length;
+  f.click('#launch');
+  f.step(500);
+  assert.equal(f.audio.length, played);
+});
+
+test('module card matches the compact reference: title-side listen button, direct facts and no transcript', async (t) => {
+  const f = fixture(t);
+  f.click('[data-mode="structure"]');
+  assert.ok(f.$('.module-heading-row #part-name'));
+  assert.ok(f.$('.module-heading-row #narration-play'));
+  assert.equal(f.$('.module-narration'), null);
+  assert.equal(f.$('#narration-story'), null);
+  assert.equal(f.$('#narration-stop'), null);
+  assert.equal(f.$('#narration-slow'), null);
+  assert.equal(f.$('.module-more').tagName, 'SECTION');
+  assert.equal(f.$('.module-more summary'), null);
+  assert.ok(f.$('#part-description').textContent.length > 20);
+  assert.equal(f.$('#part-facts').children.length, 3);
+  f.click('#narration-play');
+  await Promise.resolve();
+  assert.equal(f.$('#narration-play').textContent.trim(), '暂停讲解');
+  f.click('#narration-play');
+  assert.equal(f.$('#narration-play').textContent.trim(), '继续听');
+  f.click('[data-part="stage2"]');
+  assert.equal(f.audio[0].removed, true);
+  assert.ok(f.$('#part-description').textContent.length > 20);
+  assert.equal(f.$('.module-more').hidden, false);
 });

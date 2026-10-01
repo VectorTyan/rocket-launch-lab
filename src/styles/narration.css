@@ -1,111 +1,99 @@
-/* Child-friendly module narration and supplementary detail. */
-
-/* A child can listen first, while the technical description stays available. */
-
+/* A compact listen button sits beside the module title; facts remain visible. */
 #app[data-mode='structure'] .module-detail {
-  width: 272px;
-  padding: 22px;
+  width: 300px;
+  padding: 24px;
 }
 
-.module-narration {
-  margin: 16px 0;
-  padding: 14px;
-  border: 1px solid var(--studio-line);
-  border-radius: 12px;
-  background: var(--studio-surface);
-}
-
-.narration-actions {
+.module-heading-row {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 15px 0 7px;
 }
 
-#app[data-mode='structure'] #narration-play {
-  display: flex;
-  flex: 1;
+.module-detail .module-heading-row h2 {
+  margin: 0;
+  min-width: 0;
+  font-size: 25px;
+  line-height: 1.4;
+}
+
+#app[data-mode='structure'] .module-heading-row #narration-play {
+  display: inline-flex;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  min-height: 48px;
-  border-radius: 9px;
+  gap: 5px;
+  padding: 7px 9px;
+  min-height: 34px;
+  border: 1px solid var(--studio-accent);
+  border-radius: 2px;
   background: var(--studio-accent);
   color: var(--studio-panel);
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 #narration-play svg {
-  width: 23px;
-  height: 23px;
+  width: 18px;
+  height: 18px;
 }
 
-#narration-stop {
-  display: grid;
-  place-items: center;
-  min-width: 42px;
-  border: 1px solid var(--studio-line);
-  border-radius: 9px;
-  color: var(--studio-text);
+.module-detail.speaking #narration-play {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--studio-accent) 17%, transparent);
 }
 
-.narration-options {
-  display: flex;
-  justify-content: space-between;
-  gap: 6px;
-  margin-top: 9px;
+#module-detail #narration-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
-.narration-options button {
-  padding: 7px 8px;
-  min-height: 36px;
-  border: 1px solid var(--studio-line);
-  border-radius: 6px;
-  color: var(--studio-text);
-  font-size: 11px;
-}
-
-.narration-options button svg {
-  width: 13px;
-  height: 13px;
-  margin-right: 4px;
-}
-
-#narration-slow[aria-pressed='true'] {
-  background: var(--studio-panel);
-  border-color: var(--studio-accent);
-  color: var(--studio-accent);
-}
-
-.module-detail #narration-status {
-  font-size: 10px;
-  line-height: 1.7;
+#module-detail.has-narration-error #narration-status {
+  position: static;
+  width: auto;
+  height: auto;
   margin: 10px 0;
+  clip-path: none;
+  white-space: normal;
+  color: var(--studio-accent);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.module-detail .module-more {
+  margin: 18px 0 0;
+  color: var(--studio-text);
+}
+
+.module-detail #part-description {
+  font-size: 12px;
+  line-height: 2;
+  margin: 0 0 20px;
   color: var(--studio-muted);
 }
 
-.module-detail .narration-story p {
-  color: var(--studio-text);
-  font-size: 12px;
-  line-height: 1.9;
-  margin: 7px 0;
-}
-
-.module-narration.speaking {
-  border-color: var(--studio-accent);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--studio-accent) 15%, transparent);
-}
-
-.module-more {
-  margin: 14px 0;
-  color: var(--studio-text);
+.module-detail #part-facts {
+  margin: 0 0 22px;
+  padding: 17px 0 0 16px;
   border-top: 1px solid var(--studio-line);
-  padding-top: 12px;
+  font-size: 11px;
+  line-height: 2;
+  color: var(--studio-muted);
 }
 
-.module-more summary {
-  cursor: pointer;
-  font-size: 12px;
-  padding: 7px 0;
+.module-detail #part-accuracy {
+  margin: 0;
+  border-left: 2px solid var(--studio-accent);
+  padding-left: 12px;
+  line-height: 1.9;
 }
 
 #app[data-mode='structure'] .module-list button.active {
@@ -115,7 +103,10 @@
 
 @media (max-width: 1000px) {
   #app[data-mode='structure'] .module-detail {
-    width: 238px;
-    padding: 15px;
+    width: 270px;
+    padding: 18px;
+  }
+  .module-detail .module-heading-row h2 {
+    font-size: 22px;
   }
 }

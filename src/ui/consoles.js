@@ -11,6 +11,11 @@ export function renderConsoles({ mission }) {
   return `
 <footer class="flight-console" id="flight-console">
         <div class="console-controls"><div class="launch-actions"><button class="launch-button" id="launch">${icon('launch')}<span>启动发射</span><kbd>SPACE</kbd></button><button class="reset-button" id="reset" title="重置任务 (R)" aria-label="重置任务">${icon('reset')}</button></div><div class="playback"><span>时间倍率</span><div class="rates">${PLAYBACK_RATES.map((rate) => `<button data-rate="${rate}" class="${rate === 1 ? 'active' : ''}" aria-pressed="${rate === 1}">${rate}×</button>`).join('')}</div></div><button class="next-event" id="next-event">下一事件 ${icon('arrow')}</button></div>
+        <div class="countdown-controls" aria-label="发射倒计时设置">
+          <button type="button" id="countdown-voice" aria-pressed="true" title="开关发射人声倒计时">${icon('volume')}<span>人声倒计时</span><i class="countdown-voice-indicator" aria-hidden="true"></i></button>
+          <small id="countdown-playback-note">倒计时 1× · 起飞后恢复所选倍率</small>
+          <small id="countdown-voice-status" role="status" aria-live="polite" hidden></small>
+        </div>
         <div class="timeline-row"><span id="timeline-start">T−00:10</span><div class="timeline-track"><input type="range" id="timeline" aria-label="任务时间轴" min="-10" max="${mission.duration}" value="-10" step="0.1"/><div class="timeline-markers" id="timeline-markers" aria-hidden="true"></div></div><span id="timeline-end">${formatTime(mission.duration)}</span></div>
         <div class="timeline-status"><span id="timeline-current-event">等待发射</span><span id="timeline-next-event"></span></div><div class="event-navigation-label">事件导航 · 按发生顺序，点击可跳转 <span>上方刻度按任务时长排列</span></div>
         <div class="event-strip" aria-label="关键飞行事件">${mission.events

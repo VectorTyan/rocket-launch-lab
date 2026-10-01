@@ -79,6 +79,8 @@ export function createApplication({
     window,
     context,
     mission,
+    preferences,
+    createAudio,
     toast: shell.toast,
     onChange: refreshHeading,
     onExplore: () => setMode('structure'),

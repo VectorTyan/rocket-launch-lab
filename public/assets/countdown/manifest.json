@@ -1,0 +1,90 @@
+{
+  "voice": "Microsoft Kangkang",
+  "sampleRate": 22050,
+  "clips": [
+    {
+      "cue": "count-1",
+      "file": "count-1.wav",
+      "seconds": 0.3323,
+      "bytes": 14700,
+      "sha256": "3b43dc34d50817aeb52dd3f213e339dce3d90a30ec0af22964b694c5955a0fbe"
+    },
+    {
+      "cue": "count-2",
+      "file": "count-2.wav",
+      "seconds": 0.3224,
+      "bytes": 14260,
+      "sha256": "4b249ae0e8f9f7ec51c08a37c249aa49c7dba4f7037561f489435725efb3105c"
+    },
+    {
+      "cue": "count-3",
+      "file": "count-3.wav",
+      "seconds": 0.4021,
+      "bytes": 17776,
+      "sha256": "0ede113d9e8c9ca384fa5afa7fa366b90951da76438111d63e820e90c4d14769"
+    },
+    {
+      "cue": "count-4",
+      "file": "count-4.wav",
+      "seconds": 0.3388,
+      "bytes": 14984,
+      "sha256": "71cabca13e8452cae1d1d8d57ad5b2d3e723049f681dc17b7f937c98774159df"
+    },
+    {
+      "cue": "count-5",
+      "file": "count-5.wav",
+      "seconds": 0.3423,
+      "bytes": 15138,
+      "sha256": "7b876fc9a5bea3fe8b78ebf51de65feff3ed7276b03081638f60c01560809c8b"
+    },
+    {
+      "cue": "count-6",
+      "file": "count-6.wav",
+      "seconds": 0.3473,
+      "bytes": 15360,
+      "sha256": "4b103073e41f4058baa17ede02abdf0927306ad6f2f3964b92cd8511c2e64360"
+    },
+    {
+      "cue": "count-7",
+      "file": "count-7.wav",
+      "seconds": 0.338,
+      "bytes": 14952,
+      "sha256": "2b755887809044f8b2c0b856f3ba6e1c39c583099a83f2eb405245777150ba53"
+    },
+    {
+      "cue": "count-8",
+      "file": "count-8.wav",
+      "seconds": 0.301,
+      "bytes": 13320,
+      "sha256": "81e91b59677628fab175ac7d9bdc0d75d4d6b40bd3a2f57a1272f92c109aa4d1"
+    },
+    {
+      "cue": "count-9",
+      "file": "count-9.wav",
+      "seconds": 0.3391,
+      "bytes": 14998,
+      "sha256": "6a46c35d98160df240c10246c8b9c2278ba2dd12b489f655cc9577cd451fc8c8"
+    },
+    {
+      "cue": "count-10",
+      "file": "count-10.wav",
+      "seconds": 0.4141,
+      "bytes": 18308,
+      "sha256": "db00f7b263205f6e8aca80959d0beab8569a4913067085ace322c18f92493e1a"
+    },
+    {
+      "cue": "ignition",
+      "file": "ignition.wav",
+      "seconds": 0.5543,
+      "bytes": 24488,
+      "sha256": "6b14a56b2735ff231cf600654abb57996ac9724a3d11b476405b4c6886ac8ed8"
+    },
+    {
+      "cue": "liftoff",
+      "file": "liftoff.wav",
+      "seconds": 0.525,
+      "bytes": 23196,
+      "sha256": "380ef181e053d789107e48308f663bfb36bac055ebb8c841e4fe404aaf7fb800"
+    }
+  ]
+}

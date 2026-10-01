@@ -352,6 +352,8 @@ test('disposing inside a frame callback does not schedule a successor frame', ()
 test('mission speed clicks settle the preceding interval at the old speed', () => {
   const clock = manualClock(),
     mission = createMissionController('falcon9', { now: clock.now });
+  // Manual timeline playback bypasses the newly added ceremonial real-time window.
+  mission.seek(-10);
   mission.toggle();
   clock.set(1200);
   mission.setRate(20);

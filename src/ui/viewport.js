@@ -8,9 +8,20 @@ export function renderViewport({ site }) {
         <div class="scene-topline"><div><span class="eyebrow" id="scene-kicker">${site.kicker}</span><h2 id="scene-title">${site.shortName}</h2><p id="scene-location">${site.padLabel} · 发射台待命</p></div><span class="scene-quality" id="quality-label">电影画质 · 教学场景</span></div>
         <div class="mission-clock" id="clock-box"><span id="mission-state"><i></i>系统就绪</span><strong id="clock">T−00:10</strong><small id="phase">等待你的发射指令</small></div>
         <div class="telemetry" id="telemetry"><div class="telemetry-heading"><i></i>飞行数据<small>教学插值</small></div><div class="metric"><span>高度 ALTITUDE</span><strong id="altitude">0.00<small>km</small></strong><div class="metric-bar"><i id="altitude-bar"></i></div></div><div class="metric"><span>速度 VELOCITY</span><strong id="velocity">0<small>m/s</small></strong></div><div class="metric small-metric"><span>发动机状态</span><strong id="engine-status">待机</strong></div><div class="metric small-metric"><span>当前视角</span><strong id="view-name">自由环绕</strong></div></div>
-        <article class="module-detail" id="module-detail" hidden><span class="eyebrow">COMPONENT INSIGHT</span><h2 id="part-name"></h2><p class="part-subtitle" id="part-subtitle"></p>
-          <section class="module-narration" aria-label="小朋友讲解"><div class="narration-actions"><button id="narration-play">${icon('volume')}<span>听讲解</span></button><button id="narration-stop" aria-label="停止讲解" disabled>${icon('close')}</button></div><div class="narration-options"><button id="narration-slow" aria-pressed="false">慢一点</button><button id="narration-replay">${icon('reset')}再听一遍</button></div><p id="narration-status" role="status" aria-live="polite">点一下喇叭，听听它的故事。</p><div class="narration-story" id="narration-story"></div></section>
-          <details class="module-more"><summary>了解更多</summary><p id="part-description"></p><ul id="part-facts"></ul><p class="accuracy-note" id="part-accuracy"></p></details><section class="interior-details" id="interior-details" hidden><h3>内部结构依据</h3><span id="interior-confidence"></span><ul id="interior-features"></ul><p id="interior-description"></p><div id="interior-sources"></div></section></article>
+        <section id="launch-ceremony" class="launch-ceremony" data-phase="count" data-number="" aria-label="点火倒计时" hidden>
+          <span class="countdown-kicker">点火倒计时</span>
+          <div class="countdown-dial">
+            <svg class="countdown-ring" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <circle class="countdown-ring-track" cx="50" cy="50" r="44" pathLength="100" />
+              <circle class="countdown-ring-progress" cx="50" cy="50" r="44" pathLength="100" />
+            </svg>
+            <strong id="countdown-number" role="timer" aria-live="off">—</strong>
+          </div>
+          <div class="countdown-copy"><strong id="countdown-label" role="status" aria-live="polite" aria-atomic="true">准备点火</strong><p id="countdown-detail">按当前型号的点火节拍推进</p></div>
+        </section>
+        <article class="module-detail" id="module-detail" hidden><span class="eyebrow">COMPONENT INSIGHT</span><div class="module-heading-row"><h2 id="part-name"></h2><button type="button" id="narration-play">${icon('volume')}<span>听讲解</span></button></div><p class="part-subtitle" id="part-subtitle"></p>
+          <p id="narration-status" role="status" aria-live="polite"></p>
+          <section class="module-more" aria-label="模块介绍"><p id="part-description"></p><ul id="part-facts"></ul><p class="accuracy-note" id="part-accuracy"></p></section><section class="interior-details" id="interior-details" hidden><h3>内部结构依据</h3><span id="interior-confidence"></span><ul id="interior-features"></ul><p id="interior-description"></p><div id="interior-sources"></div></section></article>
         <article class="assembly-coach" id="assembly-coach" hidden><span class="eyebrow">你的造箭小任务</span><span class="assembly-step" id="assembly-step">01</span><h2 id="assembly-task"></h2><p id="assembly-instruction"></p><div class="assembly-fact"><span>${icon('info')}原来是这样</span><p id="assembly-fact"></p></div><button id="assembly-hint">${icon('target')}给我一点提示</button><p class="assembly-feedback" id="assembly-feedback" role="status" aria-live="polite"></p></article>
         <div id="assembly-target-label" class="assembly-target-label" hidden>放到这里 <span>＋</span></div>
         <div class="assembly-tray-caption" id="assembly-tray-caption" hidden>${icon('build')}拿起零件，放进发光轮廓</div>
