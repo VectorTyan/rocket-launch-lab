@@ -29,7 +29,7 @@ try {
     }
 
     Write-Host ''
-    Write-Host '正在启动卡门线火箭发射实验室……' -ForegroundColor Cyan
+    Write-Host '正在启动小小火箭工程师……' -ForegroundColor Cyan
     Write-Host '待服务就绪后，在浏览器中手动打开：http://127.0.0.1:5173'
     Write-Host '保持此窗口运行；按 Ctrl+C 停止。端口被占用时会退出，不会自动换端口。'
     Write-Host ''
