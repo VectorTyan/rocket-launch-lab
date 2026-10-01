@@ -81,6 +81,7 @@
 }
 
 .module-detail #part-facts {
+  display: block;
   margin: 0 0 22px;
   padding: 17px 0 0 16px;
   border-top: 1px solid var(--studio-line);
@@ -90,6 +91,7 @@
 }
 
 .module-detail #part-accuracy {
+  display: block;
   margin: 0;
   border-left: 2px solid var(--studio-accent);
   padding-left: 12px;
