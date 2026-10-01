@@ -74,7 +74,7 @@ Windows PowerShell 使用 `npm.cmd` 可避免误调用受执行策略限制的 `
 
 服务只监听本机地址。按 `Ctrl+C` 停止；5173 被占用时会报告错误，不会自动换端口。请通过服务地址访问游戏，不要直接双击 `index.html`。
 
-仓库：[VectorTyan/rocket-launch-lab](https://github.com/VectorTyan/rocket-launch-lab)（私有，需要相应访问权限）。
+公开仓库：[VectorTyan/rocket-launch-lab](https://github.com/VectorTyan/rocket-launch-lab)，可直接浏览或克隆。
 
 ## 常用操作与画质
 
