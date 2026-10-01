@@ -11,7 +11,7 @@ export function createNarrator({createAudio=src=>new Audio(src),onChange=()=>{}}
   function stop(){release();status='idle';error='';emit();}
   function fail(message){release();status='error';error=message;emit();}
   async function play(){
-    if(disposed||!lesson?.audio){fail('这段讲解暂时无法播放，可以先看看下面的小故事。');return;}
+    if(disposed||!lesson?.audio){fail('这段讲解暂时无法播放，可以先看看下面的部件介绍。');return;}
     if(!audio){
       audio=createAudio(lesson.audio);audio.preload='auto';audio.playbackRate=slow?.8:1;audio.preservesPitch=true;
       const current=version;

@@ -1,0 +1,390 @@
+/* Header, navigation and sidebar layout. */
+
+.app-header {
+  height: 78px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  background: #0d1721;
+  gap: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.brand small {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #8b9cab;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.brand-mark {
+  width: 36px;
+  height: 42px;
+  border: 1px solid #47515a;
+  display: grid;
+  place-items: center;
+  clip-path: polygon(25% 0, 75% 0, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0 75%, 0 25%);
+  background: #202d37;
+}
+
+.brand-mark svg {
+  width: 25px;
+  height: 25px;
+  color: var(--accent);
+}
+
+.mode-tabs {
+  display: flex;
+  gap: 4px;
+  background: #08111a;
+  padding: 5px;
+  border: 1px solid #21303b;
+  border-radius: 8px;
+}
+
+.mode-tabs button {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 19px;
+  font-size: 13px;
+  color: #8899a8;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.mode-tabs button.active {
+  background: #283641;
+  color: #f0f4f4;
+  box-shadow: 0 1px 3px #0005;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.local-badge {
+  font-size: 11px;
+  color: #9eaeb9;
+  white-space: nowrap;
+}
+
+.local-badge i,
+.telemetry-heading i,
+.scene-bottomline i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--teal);
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.icon-button {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  color: #91a2af;
+}
+
+.icon-button.enabled {
+  color: var(--accent);
+}
+
+.about-button {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  font-size: 12px;
+  color: #a3b0bb;
+  white-space: nowrap;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: 306px minmax(0, 1fr);
+  height: calc(100dvh - 78px);
+  min-height: 650px;
+}
+
+.sidebar {
+  padding: 29px 25px 18px;
+  background: linear-gradient(155deg, #15212c, #101b25 60%);
+  border-right: 1px solid var(--line);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: #344653 transparent;
+}
+
+.mission-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.eyebrow {
+  font-size: 9px;
+  color: #90a7b9;
+  font-weight: 600;
+  letter-spacing: 1.9px;
+}
+
+.edition {
+  border: 1px solid #455047;
+  color: #a4b79a;
+  font-size: 9px;
+  padding: 3px 6px;
+  border-radius: 3px;
+}
+
+.sidebar h1 {
+  font-size: 51px;
+  font-weight: 500;
+  letter-spacing: -2.5px;
+  margin: 17px 0 0;
+  line-height: 1.1;
+}
+
+.sidebar h1 em {
+  font-style: normal;
+  color: var(--accent);
+  font-weight: 300;
+}
+
+.rocket-subtitle {
+  font-size: 13px;
+  color: #b9c5cf;
+  margin: 10px 0 0;
+  letter-spacing: 0.6px;
+}
+
+.rocket-subtitle span {
+  font-size: 10px;
+  color: #687f93;
+  border-left: 1px solid #3a4a56;
+  margin-left: 10px;
+  padding-left: 10px;
+}
+
+.intro {
+  color: #7e91a2;
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 16px 0 18px;
+}
+
+.specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 13px;
+  padding: 0 0 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.specs > div + div {
+  border-left: 1px solid var(--line);
+  padding-left: 13px;
+}
+
+.specs strong {
+  display: block;
+  font-size: 22px;
+  font-weight: 500;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.specs strong span {
+  font-size: 10px;
+  font-weight: 400;
+  color: #93a3b1;
+}
+
+.specs small {
+  display: block;
+  font-size: 9px;
+  color: #8396a8;
+  margin-top: 5px;
+  letter-spacing: 0.5px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 23px 0 17px;
+}
+
+.section-title h2 {
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0;
+  color: #c6d0d8;
+}
+
+.section-title > span {
+  font-size: 8px;
+  letter-spacing: 1.3px;
+  color: #5e778a;
+}
+
+.field-label {
+  font-size: 10px;
+  color: #8396a5;
+  display: block;
+  margin: 13px 0 7px;
+}
+
+select {
+  appearance: none;
+  width: 100%;
+  border: 1px solid #344550;
+  border-radius: 4px;
+  color: #d1dbe2;
+  background: #172632
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='m3 4 3 3 3-3' stroke='%2396a7b3' fill='none'/%3E%3C/svg%3E")
+    no-repeat right 10px center / 12px;
+  padding: 11px 28px 11px 11px;
+  font-size: 11px;
+  outline: none;
+  cursor: pointer;
+}
+
+select:focus {
+  border-color: var(--accent);
+}
+
+select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.site-caption {
+  font-size: 8px;
+  color: #7c90a0;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 9px;
+  gap: 5px;
+}
+
+.camera-title {
+  margin-top: 27px;
+  margin-bottom: 12px;
+}
+
+.camera-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+
+.camera-option {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  text-align: left;
+  border: 1px solid #2d3d49;
+  border-radius: 4px;
+  padding: 9px 8px;
+  font-size: 10px;
+  color: #8ea1b1;
+  background: #14222d;
+}
+
+.camera-option:first-child {
+  grid-column: 1/-1;
+}
+
+.camera-option svg {
+  width: 15px;
+  height: 15px;
+}
+
+.camera-option kbd {
+  margin-left: auto;
+  color: #516a7d;
+  font-size: 8px;
+  font-family: inherit;
+}
+
+.camera-option.active {
+  border-color: #94715c;
+  background: #392e28;
+  color: #ffc299;
+}
+
+.camera-option:hover {
+  background: #253440;
+}
+
+.subject-control {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.subject-control label {
+  font-size: 9px;
+  color: #869aaa;
+  white-space: nowrap;
+}
+
+.subject-control select {
+  font-size: 9px;
+  padding: 8px 24px 8px 8px;
+}
+
+.muted-note {
+  font-size: 9px;
+  color: #688295;
+  line-height: 1.9;
+  margin-top: 11px;
+}
+
+.sidebar-footer {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  border-top: 1px solid #243440;
+  padding-top: 17px;
+  margin-top: auto;
+  color: #778d9c;
+  font-size: 10px;
+}
+
+.sidebar-footer small {
+  display: block;
+  font-size: 7px;
+  letter-spacing: 1.2px;
+  margin-top: 5px;
+  color: #526d80;
+}
+
+.tiny-orbit {
+  font-size: 28px;
+  color: #799295;
+}

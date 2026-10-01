@@ -1,5 +1,5 @@
 {
-  "name": "karman-launch-lab",
+  "name": "rocket-launch-lab",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -7,12 +7,19 @@
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node --test tests/*.test.js"
+    "test": "node --test tests/*.test.js",
+    "test:integration": "node --test tests/application.test.js tests/app-services.test.js",
+    "format": "prettier --write src/main.js src/scene.js src/cutaway.js src/style.css \"src/app/**/*.js\" \"src/features/**/*.js\" \"src/ui/**/*.js\" \"src/rendering/**/*.js\" \"src/styles/**/*.css\"",
+    "format:check": "prettier --check src/main.js src/scene.js src/cutaway.js src/style.css \"src/app/**/*.js\" \"src/features/**/*.js\" \"src/ui/**/*.js\" \"src/rendering/**/*.js\" \"src/styles/**/*.css\"",
+    "check": "npm run format:check && npm test && npm run build"
   },
   "dependencies": {
     "three": "0.180.0"
   },
   "devDependencies": {
+    "jsdom": "26.1.0",
+    "prettier": "3.5.3",
+    "rollup": "4.63.5",
     "vite": "7.3.6"
   }
 }

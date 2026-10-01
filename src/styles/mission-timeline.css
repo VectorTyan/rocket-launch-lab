@@ -1,0 +1,105 @@
+/* Proportional mission markers, status and chronological navigation. */
+
+/* The rail is proportional to mission seconds; the cards are an ordered index. */
+
+.timeline-track {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+  padding: 6px 0 12px;
+}
+
+.timeline-track #timeline {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
+.timeline-markers {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  bottom: 0;
+  height: 8px;
+  pointer-events: none;
+}
+
+.timeline-markers i {
+  position: absolute;
+  width: 2px;
+  height: 6px;
+  transform: translateX(-50%);
+  background: #658092;
+}
+
+.timeline-markers i.passed {
+  background: #e6ad85;
+}
+
+.timeline-markers i.current {
+  height: 9px;
+  background: #fff0cf;
+  box-shadow: 0 0 0 1px #d99a71;
+}
+
+.timeline-status {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5px 18px;
+  margin: 7px 0 9px;
+  color: #c6d8e1;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.timeline-status span:last-child {
+  color: #96b1c2;
+}
+
+.event-navigation-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 8px;
+  color: #7895a8;
+}
+
+.event-navigation-label span {
+  color: #92aabd;
+}
+
+.event-strip {
+  justify-content: flex-start;
+  gap: 7px;
+  margin-top: 6px;
+  padding-bottom: 4px;
+}
+
+.event-strip button,
+.event-strip button:last-child {
+  flex: 0 0 auto;
+  padding: 6px 9px;
+  border: 1px solid #314753;
+  border-radius: 5px;
+  background: #10232f;
+}
+
+.event-strip button.current {
+  border-color: #e9ab80;
+  color: #ffe1bd;
+  background: #3a3029;
+}
+
+.event-strip button.current small {
+  color: #e3b493;
+}
+
+@media (max-width: 850px) {
+  .timeline-status {
+    font-size: 9px;
+  }
+  .event-navigation-label span {
+    display: none;
+  }
+}

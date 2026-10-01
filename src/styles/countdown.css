@@ -1,0 +1,456 @@
+/* Read-only launch HUD. Progress is a 0..1 fraction supplied by the mission. */
+.launch-ceremony {
+  --countdown-progress: 0;
+  --ceremony-accent: #f9b77f;
+  position: absolute;
+  z-index: 2;
+  left: 30px;
+  top: 252px;
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 12px;
+  row-gap: 8px;
+  width: min(234px, calc(50% - 52px));
+  padding: 13px 14px 15px;
+  color: #edf3f5;
+  border: 1px solid #f1b67f3b;
+  border-radius: 9px;
+  background: linear-gradient(130deg, #111e2bed, #152935d9);
+  box-shadow: 0 8px 32px #0410191a;
+  backdrop-filter: blur(10px);
+  pointer-events: none;
+  user-select: none;
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) .launch-ceremony {
+  display: none;
+}
+
+.launch-ceremony *,
+.launch-ceremony::before,
+.launch-ceremony::after {
+  pointer-events: none;
+}
+
+.countdown-kicker {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #c6d3d9;
+  font-size: 9px;
+  line-height: 1.5;
+  letter-spacing: 1.6px;
+}
+
+.countdown-kicker::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--ceremony-accent);
+  box-shadow: 0 0 7px #f9b77f70;
+}
+
+.countdown-dial {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 82px;
+  height: 82px;
+  isolation: isolate;
+}
+
+.countdown-dial::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  z-index: -1;
+  border: 1px solid var(--ceremony-accent);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.launch-ceremony.beat .countdown-dial::after {
+  animation: countdown-ring-pulse 0.85s ease-out;
+}
+.launch-ceremony.beat #countdown-number {
+  animation: countdown-number-beat 0.42s ease-out;
+}
+
+.countdown-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  overflow: visible;
+}
+
+.countdown-ring-track {
+  stroke: #9bb8c82e;
+  stroke-width: 1;
+}
+
+.countdown-ring-progress {
+  stroke: var(--ceremony-accent);
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-dasharray: 100 100;
+  stroke-dashoffset: calc(100 * (1 - clamp(0, var(--countdown-progress), 1)));
+  filter: drop-shadow(0 0 3px #f9b77f50);
+  transition:
+    stroke-dashoffset 0.12s linear,
+    stroke 0.2s ease;
+}
+
+#countdown-number {
+  display: block;
+  color: var(--ceremony-accent);
+  font-size: 52px;
+  font-weight: 450;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  letter-spacing: -2px;
+  text-align: center;
+  text-shadow: 0 0 18px #ed9e542c;
+}
+
+.countdown-copy {
+  min-width: 0;
+}
+
+#countdown-label {
+  display: block;
+  color: #f8e7d6;
+  font-size: 13px;
+  line-height: 1.55;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+#countdown-detail {
+  margin: 7px 0 0;
+  color: #a9bdc9;
+  font-size: 9px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.launch-ceremony[data-phase='count']:is([data-number='3'], [data-number='2'], [data-number='1']) {
+  border-color: #f9bd8b8a;
+  box-shadow:
+    0 8px 32px #04101926,
+    inset 0 0 24px #f3a3650a;
+}
+
+.launch-ceremony[data-phase='count']:is([data-number='3'], [data-number='2'], [data-number='1'])
+  #countdown-number {
+  color: #ffd1a5;
+  font-weight: 600;
+  text-shadow: 0 0 20px #f7ab6152;
+}
+
+.launch-ceremony.beat[data-phase='count']:is([data-number='3'], [data-number='2'], [data-number='1'])
+  .countdown-dial::after {
+  animation-name: countdown-final-pulse;
+}
+
+.launch-ceremony[data-phase='ignition'] {
+  --ceremony-accent: #ffd59b;
+  border-color: #ffc77994;
+  background: linear-gradient(135deg, #30251fef, #172a35e8);
+}
+
+.launch-ceremony[data-phase='ignition'] .countdown-ring-progress {
+  stroke-width: 2.3;
+}
+
+.launch-ceremony[data-phase='liftoff'] {
+  --ceremony-accent: #b6e5d6;
+  border-color: #a1d3c16b;
+  background: linear-gradient(135deg, #17313aef, #142733e8);
+}
+
+.launch-ceremony[data-phase='liftoff'] #countdown-label {
+  color: #d6eee6;
+}
+.launch-ceremony[data-phase='liftoff'] .countdown-dial::after {
+  animation-duration: 1.4s;
+}
+.launch-ceremony:is([data-phase='ignition'], [data-phase='liftoff']) #countdown-number {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+.launch-ceremony.paused .countdown-dial::after {
+  animation: none;
+  opacity: 0.14;
+}
+.launch-ceremony.paused #countdown-number {
+  animation: none;
+}
+.launch-ceremony.paused .countdown-kicker::after {
+  content: '· 已暂停';
+  color: #adc0ca;
+  letter-spacing: 0;
+}
+.launch-ceremony.paused .countdown-ring-progress {
+  transition: none;
+}
+
+/* An independent row keeps the voice switch away from launch/pause/reset. */
+.countdown-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  margin-top: 10px;
+}
+
+#countdown-voice {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex-shrink: 0;
+  min-height: 32px;
+  padding: 6px 10px;
+  color: #efd1b7;
+  border: 1px solid #79604b;
+  border-radius: 5px;
+  background: #322a25;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+#countdown-voice svg {
+  width: 14px;
+  height: 14px;
+}
+.countdown-voice-indicator {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ecc297;
+}
+#countdown-voice[aria-pressed='false'] {
+  color: #a4b8c5;
+  border-color: #364d5b;
+  background: #172732;
+}
+#countdown-voice[aria-pressed='false'] .countdown-voice-indicator {
+  background: #607887;
+}
+#countdown-voice:hover:not(:disabled) {
+  border-color: #d4a47e;
+  color: #ffe0c5;
+}
+#countdown-voice:focus-visible {
+  outline: 2px solid #f5b487;
+  outline-offset: 3px;
+}
+
+/* The selected post-countdown speed stays clickable while 1× is active. */
+.rates button.queued-rate {
+  position: relative;
+}
+.rates button.queued-rate::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 3px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #f9b77f;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+#countdown-playback-note {
+  flex: 1 1 190px;
+  min-width: 0;
+  color: #acbcc7;
+  font-size: 9px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+}
+
+#countdown-voice-status {
+  flex: 1 0 100%;
+  padding-left: 9px;
+  border-left: 2px solid #b99573;
+  color: #e4c3a5;
+  font-size: 9px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+@keyframes countdown-ring-pulse {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.24;
+  }
+  100% {
+    transform: scale(1.17);
+    opacity: 0;
+  }
+}
+
+@keyframes countdown-final-pulse {
+  0% {
+    transform: scale(0.94);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes countdown-number-beat {
+  0% {
+    transform: scale(0.91);
+    opacity: 0.72;
+  }
+  55% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1200px) {
+  .launch-ceremony {
+    left: 22px;
+    width: min(218px, calc(50% - 46px));
+    padding: 12px;
+    gap: 8px;
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+  .countdown-dial {
+    width: 72px;
+    height: 72px;
+  }
+  #countdown-number {
+    font-size: 46px;
+  }
+  #countdown-label {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 950px) {
+  .launch-ceremony {
+    top: 233px;
+    grid-template-columns: 58px minmax(0, 1fr);
+    width: min(195px, calc(50% - 38px));
+    padding: 10px;
+    column-gap: 7px;
+  }
+  .countdown-dial {
+    width: 58px;
+    height: 58px;
+  }
+  .countdown-kicker {
+    font-size: 8px;
+    letter-spacing: 0.8px;
+  }
+  #countdown-number {
+    font-size: 38px;
+    letter-spacing: -1px;
+  }
+  .launch-ceremony:is([data-phase='ignition'], [data-phase='liftoff']) #countdown-number {
+    font-size: 18px;
+  }
+  #countdown-label {
+    font-size: 11px;
+  }
+  #countdown-detail {
+    font-size: 8px;
+    margin-top: 4px;
+    line-height: 1.6;
+  }
+  .countdown-controls {
+    gap: 5px 10px;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 700px) {
+  .launch-ceremony {
+    left: 17px;
+    top: 215px;
+    width: min(206px, calc(50% - 36px));
+    grid-template-columns: 1fr;
+    row-gap: 6px;
+    padding: 10px 11px;
+  }
+  .countdown-dial {
+    width: 58px;
+    height: 58px;
+    justify-self: start;
+  }
+  .countdown-copy {
+    grid-column: 1;
+  }
+  #countdown-detail {
+    margin-top: 3px;
+  }
+  #countdown-playback-note {
+    flex-basis: 150px;
+    font-size: 8px;
+  }
+  #countdown-voice {
+    min-height: 34px;
+  }
+}
+
+@media (max-width: 420px) {
+  .launch-ceremony {
+    top: 213px;
+    row-gap: 4px;
+    padding: 9px;
+  }
+  .countdown-dial {
+    width: 48px;
+    height: 48px;
+  }
+  #countdown-number {
+    font-size: 33px;
+  }
+  .launch-ceremony:is([data-phase='ignition'], [data-phase='liftoff']) #countdown-number {
+    font-size: 16px;
+  }
+  .countdown-kicker {
+    font-size: 7px;
+    gap: 5px;
+  }
+  .launch-ceremony.paused .countdown-kicker {
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .countdown-dial::after,
+  .launch-ceremony.beat .countdown-dial::after,
+  .launch-ceremony.beat[data-phase='count']:is([data-number='3'], [data-number='2'], [data-number='1'])
+    .countdown-dial::after {
+    animation: none;
+    opacity: 0.18;
+  }
+  .launch-ceremony.beat #countdown-number {
+    animation: none;
+  }
+  .countdown-ring-progress {
+    transition: none;
+    filter: none;
+  }
+}

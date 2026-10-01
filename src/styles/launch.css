@@ -1,0 +1,217 @@
+/* Launch console, playback rates and original time controls. */
+
+.flight-console {
+  background: #101c27;
+  border-top: 1px solid #32434e;
+  padding: 20px 27px 15px;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.console-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.launch-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.launch-button {
+  min-width: 185px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #f1a271;
+  color: #172129;
+  border: 1px solid #f7b88f;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 12px 15px;
+  box-shadow: 0 4px 15px #f0a5730c;
+}
+
+.launch-button:hover:not(:disabled) {
+  background: #ffbb8e;
+  color: #101c27;
+}
+
+.launch-button.in-flight {
+  background: #243c48;
+  border-color: #4e7180;
+  color: #d0e0e7;
+}
+
+.launch-button kbd {
+  font-size: 8px;
+  font-weight: 400;
+  border: 1px solid #16273240;
+  border-radius: 2px;
+  padding: 2px 3px;
+  margin-left: 10px;
+  letter-spacing: 0.5px;
+}
+
+.launch-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.reset-button {
+  border: 1px solid #354954;
+  padding: 10px;
+  border-radius: 4px;
+  color: #b3c3ce;
+}
+
+.reset-button:hover {
+  background: #263c4a;
+}
+
+.playback {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.playback > span {
+  font-size: 9px;
+  color: #8599a9;
+  white-space: nowrap;
+}
+
+.rates {
+  display: flex;
+  gap: 2px;
+  background: #0a151e;
+  padding: 4px;
+  border-radius: 4px;
+  border: 1px solid #233541;
+}
+
+.rates button {
+  padding: 6px 9px;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  color: #8096a7;
+  border-radius: 3px;
+}
+
+.rates button.active {
+  background: #2c3b46;
+  color: #e6edef;
+}
+
+.next-event {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 10px;
+  color: #a9bbc7;
+  white-space: nowrap;
+}
+
+.next-event svg {
+  width: 15px;
+  height: 15px;
+}
+
+.timeline-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.timeline-row > span {
+  font-size: 8px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
+  color: #8197a6;
+  white-space: nowrap;
+}
+
+input[type='range'] {
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  outline: none;
+  background: #344b5b;
+  cursor: pointer;
+  accent-color: var(--accent);
+}
+
+input[type='range']::-webkit-slider-thumb {
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #f6bd96;
+  box-shadow: 0 0 0 4px #f6bd9610;
+}
+
+input[type='range']:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 5px;
+}
+
+#timeline {
+  background: linear-gradient(to right, #e9ab80 var(--progress, 0%), #314957 var(--progress, 0%));
+}
+
+.event-strip {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 12px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #334a5b transparent;
+}
+
+.event-strip button {
+  font-size: 9px;
+  white-space: nowrap;
+  text-align: left;
+  color: #8194a3;
+  position: relative;
+  padding: 4px 0;
+  min-width: max-content;
+}
+
+.event-strip button i {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border: 1px solid #708390;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: 2px;
+}
+
+.event-strip button small {
+  display: block;
+  font-size: 7px;
+  letter-spacing: 0.7px;
+  color: #587285;
+  margin: 4px 0 0 10px;
+}
+
+.event-strip button.passed {
+  color: #e3b493;
+}
+
+.event-strip button.passed i {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.event-strip button:last-child {
+  border-left: 1px solid #314753;
+  padding-left: 13px;
+}

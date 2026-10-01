@@ -11,7 +11,7 @@ call npm.cmd ci
 if errorlevel 1 goto failed
 :ready
 echo.
-echo KARMAN Launch Lab - http://127.0.0.1:5173
+echo Little Rocket Engineer - http://127.0.0.1:5173
 echo Keep this window open. Press Ctrl+C to stop.
 echo.
 call npm.cmd run dev -- --port 5173 --strictPort

@@ -1,0 +1,114 @@
+/* A compact listen button sits beside the module title; facts remain visible. */
+#app[data-mode='structure'] .module-detail {
+  width: 300px;
+  padding: 24px;
+}
+
+.module-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 15px 0 7px;
+}
+
+.module-detail .module-heading-row h2 {
+  margin: 0;
+  min-width: 0;
+  font-size: 25px;
+  line-height: 1.4;
+}
+
+#app[data-mode='structure'] .module-heading-row #narration-play {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 7px 9px;
+  min-height: 34px;
+  border: 1px solid var(--studio-accent);
+  border-radius: 2px;
+  background: var(--studio-accent);
+  color: var(--studio-panel);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+#narration-play svg {
+  width: 18px;
+  height: 18px;
+}
+
+.module-detail.speaking #narration-play {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--studio-accent) 17%, transparent);
+}
+
+#module-detail #narration-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+#module-detail.has-narration-error #narration-status {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 10px 0;
+  clip-path: none;
+  white-space: normal;
+  color: var(--studio-accent);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.module-detail .module-more {
+  margin: 18px 0 0;
+  color: var(--studio-text);
+}
+
+.module-detail #part-description {
+  font-size: 12px;
+  line-height: 2;
+  margin: 0 0 20px;
+  color: var(--studio-muted);
+}
+
+.module-detail #part-facts {
+  display: block;
+  margin: 0 0 22px;
+  padding: 17px 0 0 16px;
+  border-top: 1px solid var(--studio-line);
+  font-size: 11px;
+  line-height: 2;
+  color: var(--studio-muted);
+}
+
+.module-detail #part-accuracy {
+  display: block;
+  margin: 0;
+  border-left: 2px solid var(--studio-accent);
+  padding-left: 12px;
+  line-height: 1.9;
+}
+
+#app[data-mode='structure'] .module-list button.active {
+  box-shadow: inset 4px 0 0 var(--studio-accent);
+  font-weight: 700;
+}
+
+@media (max-width: 1000px) {
+  #app[data-mode='structure'] .module-detail {
+    width: 270px;
+    padding: 18px;
+  }
+  .module-detail .module-heading-row h2 {
+    font-size: 22px;
+  }
+}
