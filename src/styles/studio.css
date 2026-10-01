@@ -1,0 +1,172 @@
+/* Shared studio theme palette for inspection and assembly. */
+
+/* Studio colours are deliberately scoped: launch keeps its mission palette. */
+
+#app:is([data-mode='structure'], [data-mode='assembly']) {
+  --accent: var(--studio-accent, #176f9b);
+  --line: var(--studio-line, #b5c8d4);
+  --muted: var(--studio-muted, #496373);
+  --panel: var(--studio-panel, #f1f7fa);
+  color: var(--studio-text, #162b3b);
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) :is(.app-header, .sidebar, .explore-console) {
+  color: var(--studio-text);
+  background: var(--studio-panel);
+  border-color: var(--studio-line);
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) .sidebar {
+  min-height: 0;
+  scrollbar-color: var(--studio-line) transparent;
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) .workspace {
+  min-height: 0;
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly'])
+  :is(
+    .brand small,
+    .rocket-subtitle,
+    .intro,
+    .specs small,
+    .specs strong span,
+    .field-label,
+    .eyebrow,
+    .section-title > span,
+    .muted-note,
+    .sidebar-footer,
+    .sidebar-footer small,
+    .tiny-orbit,
+    .icon-button,
+    .about-button,
+    .local-badge
+  ) {
+  color: var(--studio-muted);
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly'])
+  :is(.section-title h2, .module-detail h2, .explore-console > span) {
+  color: var(--studio-text);
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly'])
+  :is(.edition, .brand-mark, .mode-tabs, .quality-switch, .structure-view-tabs) {
+  color: var(--studio-muted);
+  border-color: var(--studio-line);
+  background: var(--studio-surface);
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) :is(.brand-mark svg, .icon-button.enabled) {
+  color: var(--studio-accent);
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly'])
+  :is(.mode-tabs button, .quality-switch button, .structure-view-tabs button) {
+  color: var(--studio-muted);
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly'])
+  :is(.mode-tabs button.active, .quality-switch button.active, .structure-view-tabs button.active) {
+  color: var(--studio-accent);
+  background: var(--studio-panel);
+  box-shadow: 0 1px 4px #10283912;
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) button:hover:not(:disabled) {
+  color: var(--studio-text);
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) :is(button, a, select, input):focus-visible {
+  outline: 2px solid var(--studio-accent);
+  outline-offset: 3px;
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) :is(select, select option) {
+  color: var(--studio-text);
+  border-color: var(--studio-line);
+  background-color: var(--studio-surface);
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) select:focus {
+  border-color: var(--studio-accent);
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) :is(.specs, .specs > div + div, .sidebar-footer) {
+  border-color: var(--studio-line);
+}
+
+.studio-theme-control {
+  margin-top: 5px;
+}
+
+.studio-theme-control .field-label {
+  margin-top: 11px;
+}
+
+.studio-theme-control p {
+  margin: 7px 0 0;
+  color: var(--studio-muted);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) .scene-shade {
+  background: linear-gradient(180deg, #ffffff12, transparent 23%, transparent 85%, #112c3f0b);
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) .scene-topline > div {
+  max-width: min(430px, 62%);
+  padding: 11px 14px;
+  border: 1px solid color-mix(in srgb, var(--studio-line) 80%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--studio-panel) 88%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) .scene-topline :is(.eyebrow, p) {
+  color: var(--studio-muted);
+  text-shadow: none;
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) .scene-topline h2 {
+  color: var(--studio-text);
+  text-shadow: none;
+  font-weight: 600;
+  letter-spacing: 0;
+  margin: 5px 0;
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) .scene-quality {
+  color: var(--studio-muted);
+  background: color-mix(in srgb, var(--studio-panel) 90%, transparent);
+  border-color: var(--studio-line);
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) .scene-bottomline {
+  color: var(--studio-text);
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) .scene-bottomline > span {
+  padding: 6px 8px;
+  border-radius: 4px;
+  color: var(--studio-muted);
+  background: color-mix(in srgb, var(--studio-panel) 86%, transparent);
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) .scene-bottomline button {
+  color: var(--studio-text);
+  border-color: var(--studio-line);
+  background: var(--studio-panel);
+  min-height: 34px;
+}
+
+#app:is([data-mode='structure'], [data-mode='assembly']) .toast {
+  color: var(--studio-text);
+  border-color: var(--studio-line);
+  background: var(--studio-panel);
+  box-shadow: 0 6px 24px #1028391a;
+}
+
+/* Inspection cards, including the evidence legend, need their own light text palette. */

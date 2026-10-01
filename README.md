@@ -4,6 +4,8 @@
 
 当前提供 **8 款火箭、7 个可用发射工位、6 种机位和标准／电影两档画质**。官方公开的整体尺寸与主要构型用于建立比例，模块细节、场景布局和飞行轨迹仍是科普示意，仪表不是真实遥测。型号、场地与资料边界见 [火箭与场地资料](docs/火箭与场地资料.md)。
 
+代码已按应用协调、独立玩法、纯页面模板、三维渲染与领域规则拆分。后续扩展入口、依赖方向和资源生命周期见 [架构与扩展指南](docs/架构与扩展指南.md)。
+
 ![发射视图示例](docs/preview-launch.jpg)
 
 ## Windows 启动
@@ -41,6 +43,9 @@ npm.cmd run dev -- --port 5173 --strictPort
 | --- | --- |
 | `npm.cmd run build` | 对应 `npm run build`，构建到 `dist/` |
 | `npm.cmd run test` | 对应 `npm run test`，运行机型数据、模型、事件与状态逻辑测试 |
+| `npm.cmd run test:integration` | 应用交互、存档恢复、模式切换、音频与生命周期集成检查 |
+| `npm.cmd run check` | 格式检查、完整回归测试和生产构建 |
+| `npm.cmd run format` | 统一已重构模块的代码格式 |
 | `npm.cmd run preview -- --port 5173 --strictPort` | 在构建后本地预览 `dist/` |
 
 使用支持 WebGL 2 的现代桌面浏览器，并开启硬件加速。通过本地服务地址访问，不要直接双击 `index.html`。构建与逻辑测试不等于所有浏览器兼容性或真实物理精度已全部验收。已执行的检查见 [验证记录](docs/验证记录.md)。
@@ -132,6 +137,13 @@ HDR 文件位于 `public/assets/environment/`，约 **6.4 MB**（6,397,400 字�
 
 | 文件 | 内容 |
 | --- | --- |
+| [src/main.js](src/main.js) | 应用启动与热更新清理 |
+| [src/app/](src/app/) | 应用协调、存储、共享界面和生命周期 |
+| [src/features/](src/features/) | 发射、结构、讲解、组装及音效 |
+| [src/ui/](src/ui/) | 纯模板、图标、配置和格式化 |
+| [src/styles/](src/styles/) | 按职责拆分的样式，入口保持原覆盖顺序 |
+| [src/rendering/scene/](src/rendering/scene/) | 相机、交互、场景环境与资源所有权 |
+| [src/rendering/cutaway/](src/rendering/cutaway/) | 剖面算法、内部构建、材质和几何缓存 |
 | [src/fleet-data.js](src/fleet-data.js) | 八款参考构型、七个工位、兼容筛选、模块说明与来源 |
 | [src/fleet-model.js](src/fleet-model.js) | 多型号几何、模块状态与喷口布局 |
 | [src/fleet-simulation.js](src/fleet-simulation.js) | 各型教学任务、事件、轨迹与完成状态 |

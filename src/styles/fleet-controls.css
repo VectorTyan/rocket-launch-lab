@@ -1,0 +1,116 @@
+/* Fleet selector, quality controls, site references and responsive overrides. */
+
+.quality-switch {
+  display: flex;
+  padding: 3px;
+  border: 1px solid #3a4c58;
+  border-radius: 5px;
+  background: #09151e;
+  gap: 2px;
+}
+
+.quality-switch button {
+  padding: 6px 10px;
+  font-size: 10px;
+  color: #819aaa;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.quality-switch button.active {
+  color: #f2ba91;
+  background: #423326;
+}
+
+.sidebar h1 {
+  font-size: 42px;
+  line-height: 1.15;
+}
+
+.sidebar h1.long-title {
+  font-size: 32px;
+}
+
+.rocket-subtitle {
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.intro {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.map-reference {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9px;
+  color: #9ab7c7;
+  margin-top: 10px;
+}
+
+.map-reference svg {
+  width: 12px;
+  height: 12px;
+}
+
+.map-reference:hover {
+  color: #edb185;
+}
+
+.mission-profile {
+  font-size: 9px;
+  color: #718b9e;
+  padding: 8px 0;
+  margin: 5px 0 0;
+  border-bottom: 1px solid #263946;
+}
+
+.camera-option:last-child {
+  grid-column: 1/-1;
+}
+
+.camera-title {
+  margin-top: 17px;
+}
+
+.header-actions {
+  gap: 12px;
+}
+
+#app[data-mode='structure'] .module-list {
+  max-height: min(245px, 25dvh);
+}
+
+@media (max-width: 1050px) {
+  .header-actions .local-badge {
+    display: none;
+  }
+  .quality-switch button {
+    padding: 6px;
+  }
+  .app-header {
+    gap: 12px;
+  }
+  .brand {
+    min-width: 145px;
+  }
+  .header-actions {
+    gap: 6px;
+  }
+}
+
+@media (max-width: 700px) {
+  .camera-option:last-child {
+    grid-column: auto;
+  }
+  .sidebar h1 {
+    font-size: 38px;
+  }
+  .header-actions {
+    gap: 9px;
+  }
+}

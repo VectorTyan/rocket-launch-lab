@@ -1,0 +1,264 @@
+/* 3D viewport overlays and flight telemetry. */
+
+.experience {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: #0b141e;
+}
+
+.viewport-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+#viewport {
+  position: absolute;
+  inset: 0;
+}
+
+#viewport canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  outline: none;
+}
+
+.scene-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, #07121a66, transparent 25%, transparent 80%, #07121a88),
+    linear-gradient(90deg, #0b141e30, transparent 25%, transparent 75%, #0b141e40);
+}
+
+.scene-topline {
+  position: absolute;
+  left: 30px;
+  right: 27px;
+  top: 27px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.scene-topline .eyebrow {
+  color: #d3dedf;
+  font-size: 8px;
+  letter-spacing: 2.1px;
+  text-shadow: 0 1px 6px #0005;
+}
+
+.scene-topline h2 {
+  font-size: 21px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin: 8px 0;
+  color: #f5f5ed;
+  text-shadow: 0 2px 5px #0003;
+}
+
+.scene-topline p {
+  font-size: 10px;
+  color: #d5dfdf;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.scene-quality {
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  padding: 6px 9px;
+  border: 1px solid #d7e3df40;
+  border-radius: 3px;
+  background: #172b3533;
+  color: #e1e8e5;
+  backdrop-filter: blur(5px);
+}
+
+.mission-clock {
+  position: absolute;
+  left: 30px;
+  top: 128px;
+  pointer-events: none;
+  text-shadow: 0 2px 10px #0004;
+}
+
+.mission-clock > span {
+  display: flex;
+  align-items: center;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: #dce3df;
+}
+
+.mission-clock i {
+  width: 5px;
+  height: 5px;
+  background: #bedac9;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+
+.mission-clock i.live {
+  background: #f6ab70;
+  box-shadow: 0 0 10px #f6ab70;
+}
+
+.mission-clock strong {
+  display: block;
+  font-size: 39px;
+  font-weight: 300;
+  letter-spacing: -1.5px;
+  line-height: 1.25;
+  margin: 8px 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.mission-clock small {
+  font-size: 10px;
+  color: #dce5e3;
+  letter-spacing: 0.5px;
+}
+
+.telemetry {
+  position: absolute;
+  right: 26px;
+  top: 130px;
+  width: 164px;
+  border: 1px solid #d1e1e11f;
+  border-radius: 6px;
+  padding: 16px;
+  background: linear-gradient(130deg, #11232edf, #142936c9);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 35px #07121a19;
+  pointer-events: none;
+}
+
+.telemetry-heading {
+  font-size: 10px;
+  color: #c1d0d6;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.telemetry-heading small {
+  margin-left: auto;
+  font-size: 7px;
+  color: #819aa8;
+}
+
+.telemetry-heading i {
+  width: 4px;
+  height: 4px;
+  margin-right: 6px;
+}
+
+.metric {
+  margin-top: 22px;
+}
+
+.metric > span {
+  display: block;
+  font-size: 8px;
+  color: #8aa6b6;
+  letter-spacing: 0.6px;
+}
+
+.metric strong {
+  font-size: 29px;
+  font-weight: 400;
+  display: block;
+  margin-top: 7px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -1px;
+}
+
+.metric strong small {
+  font-size: 9px;
+  margin-left: 6px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #9cafb9;
+}
+
+.metric-bar {
+  height: 2px;
+  background: #4b6371;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.metric-bar i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--accent);
+}
+
+.small-metric {
+  padding-top: 16px;
+  border-top: 1px solid #7895a333;
+  margin-top: 18px;
+}
+
+.small-metric strong {
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  margin-top: 9px;
+  color: #cedadf;
+}
+
+.scene-bottomline {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  right: 27px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 8px;
+  color: #d4dedf;
+  letter-spacing: 1px;
+}
+
+.scene-bottomline > span:first-child {
+  font-size: 8px;
+}
+
+.scene-bottomline > span:nth-child(2) {
+  margin-left: auto;
+  letter-spacing: 0.5px;
+  font-size: 9px;
+  color: #cad7db;
+}
+
+.scene-bottomline button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9px;
+  background: #0f253560;
+  border: 1px solid #d6e7ea30;
+  padding: 6px 9px;
+  border-radius: 3px;
+  color: #d3e0e7;
+  backdrop-filter: blur(10px);
+  letter-spacing: 0;
+}
+
+.scene-bottomline button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.dot-separator {
+  padding: 0 4px;
+}

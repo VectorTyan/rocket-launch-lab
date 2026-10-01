@@ -1,0 +1,376 @@
+/* Original global responsive and reduced-motion rules. */
+
+@media (min-height: 920px) {
+  .sidebar {
+    padding-top: 35px;
+  }
+  .section-title {
+    margin-top: 30px;
+  }
+  .camera-option {
+    padding: 12px 8px;
+  }
+  .intro {
+    margin-bottom: 25px;
+  }
+  .specs {
+    padding-bottom: 30px;
+  }
+  .sidebar-footer {
+    margin-top: auto;
+  }
+  .module-list button {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .workspace {
+    grid-template-columns: 275px minmax(0, 1fr);
+  }
+  .sidebar {
+    padding: 24px 19px 16px;
+  }
+  .header-actions {
+    gap: 12px;
+  }
+  .app-header {
+    padding: 0 22px;
+  }
+  .telemetry {
+    width: 140px;
+    right: 20px;
+    padding: 13px;
+  }
+  .mission-clock {
+    left: 22px;
+  }
+  .scene-topline {
+    left: 22px;
+    right: 20px;
+  }
+  .flight-console {
+    padding: 17px 20px 13px;
+  }
+  .launch-button {
+    min-width: 148px;
+    padding: 12px 11px;
+  }
+  .launch-button kbd {
+    display: none;
+  }
+  .playback {
+    gap: 8px;
+  }
+  .rates button {
+    padding: 6px;
+  }
+  .next-event {
+    font-size: 9px;
+  }
+  .module-detail {
+    width: 205px;
+    right: 20px;
+    padding: 17px;
+  }
+  .scene-bottomline {
+    left: 22px;
+    right: 20px;
+    gap: 12px;
+  }
+  .scene-bottomline > span:nth-child(2) {
+    display: none;
+  }
+}
+
+@media (max-width: 950px) {
+  .header-actions .local-badge {
+    display: none;
+  }
+  .app-header {
+    gap: 15px;
+  }
+  .brand {
+    font-size: 16px;
+    gap: 8px;
+  }
+  .brand small {
+    font-size: 6px;
+  }
+  .mode-tabs button {
+    padding: 9px 12px;
+    font-size: 11px;
+  }
+  .about-button {
+    font-size: 0;
+    gap: 0;
+  }
+  .workspace {
+    grid-template-columns: 248px minmax(0, 1fr);
+  }
+  .sidebar {
+    padding: 20px 16px;
+  }
+  .sidebar h1 {
+    font-size: 45px;
+  }
+  .telemetry {
+    top: 135px;
+    width: 120px;
+    padding: 12px;
+  }
+  .metric strong {
+    font-size: 25px;
+  }
+  .telemetry-heading small {
+    display: none;
+  }
+  .scene-quality {
+    display: none;
+  }
+  .mission-clock strong {
+    font-size: 31px;
+  }
+  .console-controls {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .playback {
+    margin-left: auto;
+  }
+  .next-event {
+    display: none;
+  }
+  .scene-topline h2 {
+    font-size: 18px;
+  }
+  .scene-topline p {
+    font-size: 9px;
+  }
+  .scene-topline {
+    top: 23px;
+  }
+  .module-detail {
+    top: auto;
+    bottom: 66px;
+    max-height: 220px;
+    width: 185px;
+    padding: 15px;
+  }
+  .module-detail h2 {
+    font-size: 20px;
+  }
+  .module-detail p {
+    font-size: 10px;
+  }
+  .module-detail ul {
+    display: none;
+  }
+  .explore-console {
+    padding: 20px;
+  }
+  .explore-console small {
+    max-width: 180px;
+    line-height: 1.6;
+  }
+  .explore-console button {
+    padding: 10px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 700px) {
+  .app-header {
+    height: auto;
+    min-height: 108px;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    gap: 12px;
+  }
+  .brand {
+    flex: 1;
+  }
+  .header-actions {
+    flex: 0;
+  }
+  .mode-tabs {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    padding: 3px;
+  }
+  .mode-tabs button {
+    flex: 1;
+    justify-content: center;
+  }
+  .workspace {
+    height: auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar {
+    order: 2;
+    overflow: visible;
+    display: block;
+    border-right: 0;
+    border-top: 1px solid var(--line);
+    padding: 24px;
+  }
+  .sidebar h1 {
+    font-size: 42px;
+  }
+  .mission-heading {
+    max-width: 320px;
+  }
+  .rocket-subtitle {
+    margin-top: 7px;
+  }
+  .intro {
+    display: none;
+  }
+  .specs {
+    max-width: 360px;
+    margin-top: 20px;
+    padding-bottom: 20px;
+  }
+  .sidebar-footer {
+    margin-top: 25px;
+  }
+  .experience {
+    height: calc(100dvh - 108px);
+    min-height: 650px;
+  }
+  .viewport-wrap {
+    min-height: 390px;
+  }
+  .flight-console {
+    padding: 16px;
+  }
+  .launch-button {
+    min-width: 155px;
+  }
+  .rates button {
+    padding: 6px 7px;
+  }
+  .playback > span {
+    display: none;
+  }
+  .scene-topline {
+    left: 17px;
+    top: 20px;
+  }
+  .scene-topline h2 {
+    font-size: 18px;
+  }
+  .mission-clock {
+    left: 17px;
+    top: 111px;
+  }
+  .mission-clock strong {
+    font-size: 29px;
+  }
+  .telemetry {
+    right: 15px;
+    top: 118px;
+    width: 108px;
+    padding: 10px;
+  }
+  .metric {
+    margin-top: 17px;
+  }
+  .metric strong {
+    font-size: 22px;
+  }
+  .metric > span {
+    font-size: 7px;
+  }
+  .small-metric strong {
+    font-size: 10px;
+  }
+  .metric strong small {
+    font-size: 8px;
+  }
+  .scene-bottomline {
+    left: 17px;
+    right: 15px;
+    bottom: 17px;
+  }
+  .scene-bottomline > span {
+    font-size: 7px !important;
+  }
+  .scene-bottomline button {
+    margin-left: auto;
+  }
+  .camera-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .camera-option:first-child {
+    grid-column: auto;
+  }
+  .camera-option {
+    padding: 12px;
+  }
+  .subject-control {
+    max-width: 360px;
+  }
+  .field-label {
+    margin-top: 16px;
+  }
+  .module-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .module-list button {
+    padding: 12px 8px;
+  }
+  .module-detail {
+    right: 15px;
+    bottom: 62px;
+    max-height: 190px;
+    width: 160px;
+    padding: 13px;
+  }
+  .module-detail h2 {
+    font-size: 17px;
+  }
+  .module-detail .eyebrow {
+    font-size: 6px;
+  }
+  .module-detail p {
+    font-size: 9px;
+  }
+  .part-subtitle {
+    margin-bottom: 10px !important;
+  }
+  .module-detail .accuracy-note {
+    display: none;
+  }
+  .explore-console {
+    padding: 18px 16px;
+  }
+  .explore-console > span {
+    font-size: 10px;
+  }
+  .explore-console small {
+    font-size: 8px;
+    margin-left: 0;
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  dialog {
+    padding: 23px;
+  }
+  dialog h2 {
+    font-size: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
